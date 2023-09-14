@@ -25,7 +25,26 @@ const console = {
     print('"' + args + '",');
     fs.appendFileSync('./gameOutput.txt', args + '\n');
   },
-}
+
+};
+
+exports.currentCategory = (currentPlace) => {
+
+  const popPlaces = [0, 4, 8];
+  const sciencePlaces = [1, 5, 9];
+  const sportsPlaces = [2, 6, 10];
+
+  if(popPlaces.includes(currentPlace)) {
+    return 'Pop';
+  }
+  if(sciencePlaces.includes(currentPlace)) {
+    return 'Science';
+  }
+  if(sportsPlaces.includes(currentPlace)) {
+    return 'Sports';
+  }
+  return 'Rock';
+};
 
 exports.Game = function() {
   var players          = new Array();
@@ -46,25 +65,27 @@ exports.Game = function() {
   };
 
   var currentCategory = function(){
-    if(places[currentPlayer] == 0)
-      return 'Pop';
-    if(places[currentPlayer] == 4)
-      return 'Pop';
-    if(places[currentPlayer] == 8)
-      return 'Pop';
-    if(places[currentPlayer] == 1)
-      return 'Science';
-    if(places[currentPlayer] == 5)
-      return 'Science';
-    if(places[currentPlayer] == 9)
-      return 'Science';
-    if(places[currentPlayer] == 2)
-      return 'Sports';
-    if(places[currentPlayer] == 6)
-      return 'Sports';
-    if(places[currentPlayer] == 10)
-      return 'Sports';
-    return 'Rock';
+    return exports.currentCategory(places[currentPlayer]);
+    // return exports.currentCategory(0);
+    // if(places[currentPlayer] == 0)
+    //   return 'Pop';
+    // if(places[currentPlayer] == 4)
+    //   return 'Pop';
+    // if(places[currentPlayer] == 8)
+    //   return 'Pop';
+    // if(places[currentPlayer] == 1)
+    //   return 'Science';
+    // if(places[currentPlayer] == 5)
+    //   return 'Science';
+    // if(places[currentPlayer] == 9)
+    //   return 'Science';
+    // if(places[currentPlayer] == 2)
+    //   return 'Sports';
+    // if(places[currentPlayer] == 6)
+    //   return 'Sports';
+    // if(places[currentPlayer] == 10)
+    //   return 'Sports';
+    // return 'Rock';
   };
 
   this.createRockQuestion = function(index){
